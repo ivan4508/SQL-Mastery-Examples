@@ -3,7 +3,7 @@ import { useLocation } from "wouter";
 import { Sidebar } from "@/components/Sidebar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Search, ChevronRight } from "lucide-react";
+import { Search, ChevronRight, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { SQL } from "@/lib/SQL.ts";
@@ -11,6 +11,8 @@ import { PostgreSQL } from "@/lib/PostgreSQL.ts";
 import { SQLite } from "@/lib/SQLite.ts";
 import { TSQL } from "@/lib/TSQL.ts";
 import { SQLGraph } from "@/lib/SQLGraph.ts";
+
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 interface Argument {
   name: string;
@@ -49,13 +51,13 @@ export default function DialectPage({ title }: { title: string }) {
   const categoryFilter = searchParams.get("category");
 
   let currentTerms = dialectTerms[title] || [];
-  
+
   if (title === "SQL-Graph") {
     currentTerms = SQLGraph;
   }
-  
-  const filteredByCategory = categoryFilter 
-    ? currentTerms.filter(t => t.category === categoryFilter)
+
+  const filteredByCategory = categoryFilter
+    ? currentTerms.filter((t) => t.category === categoryFilter)
     : currentTerms;
 
   const filteredTerms = filteredByCategory.filter(
@@ -63,8 +65,25 @@ export default function DialectPage({ title }: { title: string }) {
       term.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       term.category.toLowerCase().includes(searchQuery.toLowerCase())
   );
-  
+
   const categories = Array.from(new Set(filteredTerms.map((t) => t.category)));
+  const MobileNav = () => (
+    <div className="flex items-center justify-between md:hidden mb-6">
+      <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+        SQL Mastery
+      </h1>
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button variant="ghost" size="icon" className="md:hidden">
+            <Menu className="h-6 w-6" />
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="left" className="p-0 w-72">
+          <Sidebar />
+        </SheetContent>
+      </Sheet>
+    </div>
+  );
 
   if (selectedTerm) {
     return (
@@ -156,6 +175,7 @@ export default function DialectPage({ title }: { title: string }) {
       </div>
       <main className="flex-1 h-full overflow-y-auto relative">
         <div className="max-w-5xl mx-auto px-4 sm:px-8 py-8 md:py-12">
+          <MobileNav />
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
             <div>
               <h1 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">
