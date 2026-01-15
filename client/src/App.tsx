@@ -7,7 +7,7 @@ import Dashboard from "@/pages/Dashboard";
 import DialectPage from "@/pages/DialectPage";
 import NotFound from "@/pages/not-found";
 
-const base = "/SQL-Mastery-Examples/";
+const base = "/";
 
 function RouterConfig() {
   return (
