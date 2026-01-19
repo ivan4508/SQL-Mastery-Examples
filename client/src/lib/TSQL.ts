@@ -325,6 +325,191 @@ export const TSQL_BASE =[
         { name: "Example 2", description: "Тангенс 45 градусов.", example: "SELECT TAN(45 * PI() / 180); -- 1.0" }
       ]
     },
+    // ТИПЫ ДАННЫХ
+    {
+      id: "tsql_nchar",
+      name: "NCHAR",
+      category: "Типы данных",
+      description: "Строковые данные фиксированной длины в кодировке Юникод (UTF-16).",
+      syntax: "NCHAR(n)",
+      example: "CREATE TABLE t (code NCHAR(5));",
+      arguments: [
+        { name: "n", description: "Количество символов (от 1 до 4000). Занимает 2 байта на символ.", example: "NCHAR(10)" }
+      ]
+    },
+    {
+      id: "tsql_nvarchar",
+      name: "NVARCHAR",
+      category: "Типы данных",
+      description: "Строковые данные переменной длины в кодировке Юникод.",
+      syntax: "NVARCHAR(n | max)",
+      example: "CREATE TABLE t (name NVARCHAR(100));",
+      arguments: [
+        { name: "n", description: "Максимальное количество символов.", example: "NVARCHAR(50)" },
+        { name: "max", description: "Максимальный объем хранения (2 ГБ).", example: "NVARCHAR(MAX)" }
+      ]
+    },
+    {
+      id: "tsql_ntext",
+      name: "NTEXT",
+      category: "Типы данных",
+      description: "Устаревший тип данных для больших строк Юникод. Рекомендуется использовать NVARCHAR(MAX).",
+      syntax: "NTEXT",
+      example: "CREATE TABLE t (old_content NTEXT);"
+    },
+    {
+      id: "tsql_varchar_max",
+      name: "VARCHAR(MAX)",
+      category: "Типы данных",
+      description: "Строковые данные переменной длины (не Юникод) с неограниченным размером до 2 ГБ.",
+      syntax: "VARCHAR(MAX)",
+      example: "CREATE TABLE t (content VARCHAR(MAX));"
+    },
+    {
+      id: "tsql_nvarchar_max",
+      name: "NVARCHAR(MAX)",
+      category: "Типы данных",
+      description: "Строковые данные переменной длины в кодировке Юникод с неограниченным размером до 2 ГБ.",
+      syntax: "NVARCHAR(MAX)",
+      example: "CREATE TABLE t (content NVARCHAR(MAX));"
+    },
+    {
+      id: "tsql_varbinary_max",
+      name: "VARBINARY(MAX)",
+      category: "Типы данных",
+      description: "Двоичные данные переменной длины с максимальным размером до 2 ГБ.",
+      syntax: "VARBINARY(MAX)",
+      example: "CREATE TABLE t (file_data VARBINARY(MAX));"
+    },
+    {
+      id: "tsql_image",
+      name: "IMAGE",
+      category: "Типы данных",
+      description: "Устаревший тип для хранения двоичных данных. Рекомендуется VARBINARY(MAX).",
+      syntax: "IMAGE",
+      example: "CREATE TABLE t (legacy_image IMAGE);"
+    },
+    {
+      id: "tsql_tinyint",
+      name: "TINYINT",
+      category: "Типы данных",
+      description: "Целое число от 0 до 255 (1 байт).",
+      syntax: "TINYINT",
+      example: "CREATE TABLE t (age TINYINT);"
+    },
+    {
+      id: "tsql_smallmoney",
+      name: "SMALLMONEY",
+      category: "Типы данных",
+      description: "Денежные данные от -214,748.3648 до 214,748.3647 (4 байта).",
+      syntax: "SMALLMONEY",
+      example: "CREATE TABLE t (price SMALLMONEY);"
+    },
+    {
+      id: "tsql_datetime2",
+      name: "DATETIME2",
+      category: "Типы данных",
+      description: "Расширенный тип даты и времени с более высокой точностью и диапазоном.",
+      syntax: "DATETIME2(n)",
+      example: "CREATE TABLE t (event_time DATETIME2(7));",
+      arguments: [
+        { name: "n", description: "Точность дробных секунд (0-7).", example: "DATETIME2(3)" }
+      ]
+    },
+    {
+      id: "tsql_smalldatetime",
+      name: "SMALLDATETIME",
+      category: "Типы данных",
+      description: "Дата и время с точностью до минуты (диапазон 1900-2079).",
+      syntax: "SMALLDATETIME",
+      example: "CREATE TABLE t (log_date SMALLDATETIME);"
+    },
+    {
+      id: "tsql_datetimeoffset",
+      name: "DATETIMEOFFSET",
+      category: "Типы данных",
+      description: "Дата и время с учетом часового пояса.",
+      syntax: "DATETIMEOFFSET(n)",
+      example: "CREATE TABLE t (local_time DATETIMEOFFSET);",
+      arguments: [
+        { name: "n", description: "Точность дробных секунд.", example: "DATETIMEOFFSET(7)" }
+      ]
+    },
+    {
+      id: "tsql_cursor",
+      name: "CURSOR",
+      category: "Типы данных",
+      description: "Специальный тип данных для работы с курсорами в процедурах и скриптах.",
+      syntax: "CURSOR",
+      example: "DECLARE my_cursor CURSOR FOR SELECT id FROM t;"
+    },
+    {
+      id: "tsql_rowversion",
+      name: "ROWVERSION",
+      category: "Типы данных",
+      description: "Автоматически обновляемое уникальное двоичное число внутри базы (ранее TIMESTAMP).",
+      syntax: "ROWVERSION",
+      example: "CREATE TABLE t (id int, rv ROWVERSION);"
+    },
+    {
+      id: "tsql_hierarchyid",
+      name: "HIERARCHYID",
+      category: "Типы данных",
+      description: "Тип данных для представления положения в иерархической структуре.",
+      syntax: "HIERARCHYID",
+      example: "CREATE TABLE org (node HIERARCHYID, name nvarchar(50));"
+    },
+    {
+      id: "tsql_uniqueidentifier",
+      name: "UNIQUEIDENTIFIER",
+      category: "Типы данных",
+      description: "Глобально уникальный идентификатор (GUID).",
+      syntax: "UNIQUEIDENTIFIER",
+      example: "CREATE TABLE t (guid UNIQUEIDENTIFIER DEFAULT NEWID());"
+    },
+    {
+      id: "tsql_sql_variant",
+      name: "SQL_VARIANT",
+      category: "Типы данных",
+      description: "Тип данных, который может хранить значения различных типов данных SQL Server.",
+      syntax: "SQL_VARIANT",
+      example: "CREATE TABLE t (val SQL_VARIANT);"
+    },
+    {
+      id: "tsql_table",
+      name: "TABLE",
+      category: "Типы данных",
+      description: "Тип данных для хранения результирующего набора строк (табличная переменная).",
+      syntax: "DECLARE @my_table TABLE (id int, name nvarchar(50));",
+      example: "DECLARE @tmp TABLE (id int); INSERT INTO @tmp VALUES (1);"
+    },
+    {
+      id: "tsql_geometry",
+      name: "GEOMETRY",
+      category: "Типы данных",
+      description: "Тип данных для работы с плоскими (евклидовыми) пространственными данными.",
+      syntax: "GEOMETRY",
+      example: "DECLARE @g GEOMETRY = GEOMETRY::STGeomFromText('POINT (1 2)', 0);"
+    },
+    {
+      id: "tsql_geography",
+      name: "GEOGRAPHY",
+      category: "Типы данных",
+      description: "Тип данных для работы с географическими (эллипсоидными) пространственными данными.",
+      syntax: "GEOGRAPHY",
+      example: "DECLARE @g GEOGRAPHY = GEOGRAPHY::STGeomFromText('LINESTRING(-122 47, -122 48)', 4326);"
+    },
+    {
+      id: "tsql_vector",
+      name: "VECTOR (SQL Server 2025+)",
+      category: "Типы данных",
+      description: "Новый тип данных для хранения векторных эмбеддингов, используемых в ИИ и семантическом поиске.",
+      syntax: "VECTOR(n)",
+      example: "CREATE TABLE ai_data (embedding VECTOR(1536));",
+      arguments: [
+        { name: "n", description: "Размерность вектора.", example: "VECTOR(768)" }
+      ]
+    },
     {
       id: "tsql_asin",
       name: "ASIN()",
@@ -2123,6 +2308,191 @@ export const TSQL_BASE =[
         { name: "numeric_expression", description: "Угол в радианах.", example: "TAN(1.0)" },
         { name: "Example 1", description: "Тангенс 0.", example: "SELECT TAN(0); -- 0.0" },
         { name: "Example 2", description: "Тангенс 45 градусов.", example: "SELECT TAN(45 * PI() / 180); -- 1.0" }
+      ]
+    },
+    // ТИПЫ ДАННЫХ
+    {
+      id: "tsql_nchar",
+      name: "NCHAR",
+      category: "Типы данных",
+      description: "Строковые данные фиксированной длины в кодировке Юникод (UTF-16).",
+      syntax: "NCHAR(n)",
+      example: "CREATE TABLE t (code NCHAR(5));",
+      arguments: [
+        { name: "n", description: "Количество символов (от 1 до 4000). Занимает 2 байта на символ.", example: "NCHAR(10)" }
+      ]
+    },
+    {
+      id: "tsql_nvarchar",
+      name: "NVARCHAR",
+      category: "Типы данных",
+      description: "Строковые данные переменной длины в кодировке Юникод.",
+      syntax: "NVARCHAR(n | max)",
+      example: "CREATE TABLE t (name NVARCHAR(100));",
+      arguments: [
+        { name: "n", description: "Максимальное количество символов.", example: "NVARCHAR(50)" },
+        { name: "max", description: "Максимальный объем хранения (2 ГБ).", example: "NVARCHAR(MAX)" }
+      ]
+    },
+    {
+      id: "tsql_ntext",
+      name: "NTEXT",
+      category: "Типы данных",
+      description: "Устаревший тип данных для больших строк Юникод. Рекомендуется использовать NVARCHAR(MAX).",
+      syntax: "NTEXT",
+      example: "CREATE TABLE t (old_content NTEXT);"
+    },
+    {
+      id: "tsql_varchar_max",
+      name: "VARCHAR(MAX)",
+      category: "Типы данных",
+      description: "Строковые данные переменной длины (не Юникод) с неограниченным размером до 2 ГБ.",
+      syntax: "VARCHAR(MAX)",
+      example: "CREATE TABLE t (content VARCHAR(MAX));"
+    },
+    {
+      id: "tsql_nvarchar_max",
+      name: "NVARCHAR(MAX)",
+      category: "Типы данных",
+      description: "Строковые данные переменной длины в кодировке Юникод с неограниченным размером до 2 ГБ.",
+      syntax: "NVARCHAR(MAX)",
+      example: "CREATE TABLE t (content NVARCHAR(MAX));"
+    },
+    {
+      id: "tsql_varbinary_max",
+      name: "VARBINARY(MAX)",
+      category: "Типы данных",
+      description: "Двоичные данные переменной длины с максимальным размером до 2 ГБ.",
+      syntax: "VARBINARY(MAX)",
+      example: "CREATE TABLE t (file_data VARBINARY(MAX));"
+    },
+    {
+      id: "tsql_image",
+      name: "IMAGE",
+      category: "Типы данных",
+      description: "Устаревший тип для хранения двоичных данных. Рекомендуется VARBINARY(MAX).",
+      syntax: "IMAGE",
+      example: "CREATE TABLE t (legacy_image IMAGE);"
+    },
+    {
+      id: "tsql_tinyint",
+      name: "TINYINT",
+      category: "Типы данных",
+      description: "Целое число от 0 до 255 (1 байт).",
+      syntax: "TINYINT",
+      example: "CREATE TABLE t (age TINYINT);"
+    },
+    {
+      id: "tsql_smallmoney",
+      name: "SMALLMONEY",
+      category: "Типы данных",
+      description: "Денежные данные от -214,748.3648 до 214,748.3647 (4 байта).",
+      syntax: "SMALLMONEY",
+      example: "CREATE TABLE t (price SMALLMONEY);"
+    },
+    {
+      id: "tsql_datetime2",
+      name: "DATETIME2",
+      category: "Типы данных",
+      description: "Расширенный тип даты и времени с более высокой точностью и диапазоном.",
+      syntax: "DATETIME2(n)",
+      example: "CREATE TABLE t (event_time DATETIME2(7));",
+      arguments: [
+        { name: "n", description: "Точность дробных секунд (0-7).", example: "DATETIME2(3)" }
+      ]
+    },
+    {
+      id: "tsql_smalldatetime",
+      name: "SMALLDATETIME",
+      category: "Типы данных",
+      description: "Дата и время с точностью до минуты (диапазон 1900-2079).",
+      syntax: "SMALLDATETIME",
+      example: "CREATE TABLE t (log_date SMALLDATETIME);"
+    },
+    {
+      id: "tsql_datetimeoffset",
+      name: "DATETIMEOFFSET",
+      category: "Типы данных",
+      description: "Дата и время с учетом часового пояса.",
+      syntax: "DATETIMEOFFSET(n)",
+      example: "CREATE TABLE t (local_time DATETIMEOFFSET);",
+      arguments: [
+        { name: "n", description: "Точность дробных секунд.", example: "DATETIMEOFFSET(7)" }
+      ]
+    },
+    {
+      id: "tsql_cursor",
+      name: "CURSOR",
+      category: "Типы данных",
+      description: "Специальный тип данных для работы с курсорами в процедурах и скриптах.",
+      syntax: "CURSOR",
+      example: "DECLARE my_cursor CURSOR FOR SELECT id FROM t;"
+    },
+    {
+      id: "tsql_rowversion",
+      name: "ROWVERSION",
+      category: "Типы данных",
+      description: "Автоматически обновляемое уникальное двоичное число внутри базы (ранее TIMESTAMP).",
+      syntax: "ROWVERSION",
+      example: "CREATE TABLE t (id int, rv ROWVERSION);"
+    },
+    {
+      id: "tsql_hierarchyid",
+      name: "HIERARCHYID",
+      category: "Типы данных",
+      description: "Тип данных для представления положения в иерархической структуре.",
+      syntax: "HIERARCHYID",
+      example: "CREATE TABLE org (node HIERARCHYID, name nvarchar(50));"
+    },
+    {
+      id: "tsql_uniqueidentifier",
+      name: "UNIQUEIDENTIFIER",
+      category: "Типы данных",
+      description: "Глобально уникальный идентификатор (GUID).",
+      syntax: "UNIQUEIDENTIFIER",
+      example: "CREATE TABLE t (guid UNIQUEIDENTIFIER DEFAULT NEWID());"
+    },
+    {
+      id: "tsql_sql_variant",
+      name: "SQL_VARIANT",
+      category: "Типы данных",
+      description: "Тип данных, который может хранить значения различных типов данных SQL Server.",
+      syntax: "SQL_VARIANT",
+      example: "CREATE TABLE t (val SQL_VARIANT);"
+    },
+    {
+      id: "tsql_table",
+      name: "TABLE",
+      category: "Типы данных",
+      description: "Тип данных для хранения результирующего набора строк (табличная переменная).",
+      syntax: "DECLARE @my_table TABLE (id int, name nvarchar(50));",
+      example: "DECLARE @tmp TABLE (id int); INSERT INTO @tmp VALUES (1);"
+    },
+    {
+      id: "tsql_geometry",
+      name: "GEOMETRY",
+      category: "Типы данных",
+      description: "Тип данных для работы с плоскими (евклидовыми) пространственными данными.",
+      syntax: "GEOMETRY",
+      example: "DECLARE @g GEOMETRY = GEOMETRY::STGeomFromText('POINT (1 2)', 0);"
+    },
+    {
+      id: "tsql_geography",
+      name: "GEOGRAPHY",
+      category: "Типы данных",
+      description: "Тип данных для работы с географическими (эллипсоидными) пространственными данными.",
+      syntax: "GEOGRAPHY",
+      example: "DECLARE @g GEOGRAPHY = GEOGRAPHY::STGeomFromText('LINESTRING(-122 47, -122 48)', 4326);"
+    },
+    {
+      id: "tsql_vector",
+      name: "VECTOR (SQL Server 2025+)",
+      category: "Типы данных",
+      description: "Новый тип данных для хранения векторных эмбеддингов, используемых в ИИ и семантическом поиске.",
+      syntax: "VECTOR(n)",
+      example: "CREATE TABLE ai_data (embedding VECTOR(1536));",
+      arguments: [
+        { name: "n", description: "Размерность вектора.", example: "VECTOR(768)" }
       ]
     },
     {

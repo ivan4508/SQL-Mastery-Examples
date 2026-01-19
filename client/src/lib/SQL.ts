@@ -3265,6 +3265,19 @@ export const SQL = [
       "-- Пример 1: Переименование таблицы\nALTER TABLE staff RENAME TO employees;\n\n-- Пример 2: Переименование колонки\nALTER TABLE users RENAME COLUMN user_name TO username;\n\n-- Пример 3: Переименование индекса\nALTER INDEX old_idx_name RENAME TO new_idx_name;",
   },
   // ТИПЫ ДАННЫХ
+      {
+      id: "xml_sql",
+      name: "XML",
+      category: "Типы данных",
+      description: "Тип данных для хранения XML-документов. Обеспечивает проверку корректности структуры (well-formed) и поддержку функций обработки XML (XPath).",
+      syntax: "XML",
+      example: "CREATE TABLE product_specs (\n  id SERIAL PRIMARY KEY,\n  metadata XML\n);",
+      arguments: [
+        { name: "CONTENT", description: "XML-содержимое (может иметь более одного корневого элемента).", example: "INSERT INTO t VALUES ('<item>1</item><item>2</item>'::xml);" },
+        { name: "DOCUMENT", description: "Полноценный XML-документ (строго один корневой элемент).", example: "INSERT INTO t VALUES ('<root><item>1</item></root>'::xml);" },
+        { name: "XMLPARSE", description: "Преобразование строки в тип XML.", example: "SELECT XMLPARSE (DOCUMENT '<?xml version=\"1.0\"?><book><title>Manual</title></book>');" }
+      ]
+    },
   {
     id: "bigint_sql",
     name: "BIGINT",
